@@ -28,7 +28,9 @@ else()
     message(STATUS "Using local ${LIB1}")
 endif()
 
-add_executable(imagin3d src/main.cpp)
+# Project Files
+file(GLOB_RECURSE PROJECT_SOURCES src/*.cpp)
+add_executable(imagin3d ${PROJECT_SOURCES})
 
 # set the include directory
 target_include_directories(imagin3d PRIVATE ${raylib_INCLUDE_DIRS})
