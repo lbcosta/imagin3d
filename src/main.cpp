@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "lib/Math/vec3.h"
+#include "lib/Sphere/Sphere.h"
 
 // Canvas
 // 800x450 = 16:9
@@ -21,9 +22,9 @@ int main() {
         BeginDrawing();
         ClearBackground(GRAY);
 
-        vec3 rayOrigin(0.0f);
-        float sphereRadius = 40.0f;
-        vec3 sphereCenter(0.0f, 0.0f, -100.0f);
+        vec3 rayOrigin(0.0);
+        float sphereRadius = 40.0;
+        vec3 sphereCenter(0.0, 0.0, -100.0);
 
         float deltaY = WINDOW_HEIGHT / N_ROW;
         float deltaX = WINDOW_WIDTH / N_COL;
@@ -33,19 +34,13 @@ int main() {
             float y = (WINDOW_HEIGHT/2) - (deltaY/2) - (static_cast<float>(row) * deltaY);
             for (int col = 0; col <= N_COL; col++) {
                 float x = (-WINDOW_WIDTH/2) + (deltaX/2) + (static_cast<float>(col) * deltaX);
-                float z = -30.0f;
-                vec3 intersectionPoint = {x, y, z};
+                float z = -30.0;
+                vec3 at = {x, y, z};
 
-                vec3 dr = intersectionPoint - rayOrigin;
-                vec3 v = rayOrigin - sphereCenter;
+                VectorRay ray(rayOrigin, at);
+                ObjectMaterial sphereMaterial {vec3(), vec3(), vec3(), 0.0};
 
-                float a = dr.dot(dr);
-                float b = 2 * v.dot(dr);
-                float c = v.dot(v) - sphereRadius * sphereRadius;
-
-                float discriminant = b * b - 4 * a * c;
-
-                if (discriminant < 0) {
+                if (Sphere sphere(sphereCenter, sphereRadius, sphereMaterial); sphere.RayIntersection(ray) < 0) {
                     pixel = SKYBLUE;
                 } else {
                     pixel = RED;

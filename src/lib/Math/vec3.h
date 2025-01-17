@@ -5,41 +5,30 @@
 #ifndef VEC3_H
 #define VEC3_H
 
-#include <iostream>
-#include <cmath>
-#include <stdexcept>
-
 class vec3 {
 public:
     union {
-        struct { float x, y, z; }; // Coordenadas
-        struct { float r, g, b; }; // Cores
+        struct { double x, y, z; };
+        struct { double r{}, g{}, b{}; };
     };
 
-    // Construtores
     vec3();
-    vec3(float v);
-    vec3(float x, float y, float z);
+    vec3(double v);
+    vec3(double x, double y, double z);
 
-    // Operadores matemáticos
     vec3 operator+(const vec3& other) const;
     vec3 operator-(const vec3& other) const;
-    vec3 operator*(float scalar) const;
-    vec3 operator/(float scalar) const;
+    vec3 operator*(double scalar) const;
+    vec3 operator/(double scalar) const;
 
-    // Produto escalar
-    float dot(const vec3& other) const;
+    double dot(const vec3& other) const;
 
-    // Produto vetorial
     vec3 cross(const vec3& other) const;
 
-    // Norma (magnitude)
-    float magnitude() const;
+    double magnitude() const;
 
-    // Normalização
     vec3 normalize() const;
 
-    // Swizzling para subvetores
     vec3 xy() const;
     vec3 yz() const;
     vec3 zx() const;
@@ -48,7 +37,7 @@ public:
     vec3 gbr() const;
     vec3 brg() const;
 
-    // Print para depuração
+    // para debugging
     void print() const;
 };
 
