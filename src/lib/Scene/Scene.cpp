@@ -3,11 +3,12 @@
 //
 
 #include "Scene.h"
+#include "raylib.h"
 
 constexpr double FIXED_Z = -30;
 vec3 FIXED_ORIGIN = 0.0;
 
-Scene::Scene(SceneParams sceneParams) {
+Scene::Scene(const SceneParams& sceneParams) {
     this->cameraPosition = sceneParams.CameraPosition;
     this->windowWidth = sceneParams.WindowWidth;
     this->windowHeight = sceneParams.WindowHeight;
@@ -16,7 +17,7 @@ Scene::Scene(SceneParams sceneParams) {
     this->objects = sceneParams.Objects;
 };
 
-void Scene::Render(const std::function<void()>& renderFunction) {
+void Scene::Render() {
     Color pixel;
 
     double deltaY = this->windowHeight / this->canvasRowsNumber;
@@ -31,15 +32,30 @@ void Scene::Render(const std::function<void()>& renderFunction) {
             };
 
             VectorRay ray(FIXED_ORIGIN, p);
-            ObjectMaterial sphereMaterial {vec3(), vec3(), vec3(), 0.0};
+            Object* closestObject = this->GetClosestObject(ray);
 
-            if (Sphere sphere({0.0, 0.0, -100.0}, 40.0, sphereMaterial); sphere.RayIntersection(ray) < 0) {
-                pixel = SKYBLUE;
-            } else {
+            if (closestObject != nullptr) {
                 pixel = RED;
+            } else {
+                pixel = SKYBLUE;
             }
 
             DrawPixel(col, row, pixel);
         }
     }
 };
+
+Object* Scene::GetClosestObject(VectorRay ray) {
+    Object* closestObject = nullptr;
+    double closestIntersection = -1;
+    for (Object* object : this->objects) {
+        double intersectionMoment = object->RayIntersection(ray);
+        if (intersectionMoment > 0.0 && (closestIntersection < 0 || intersectionMoment < closestIntersection)) {
+            closestObject = object;
+            closestIntersection = intersectionMoment;
+        }
+    }
+
+    return closestObject;
+}
+

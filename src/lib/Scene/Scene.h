@@ -5,33 +5,35 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "raylib.h"
-#include <functional>
+#include <memory>
 #include <vector>
 #include "../Object/Object.h"
-#include "../Sphere/Sphere.h"
+
+using namespace std;
 
 struct SceneParams {
-  vec3 CameraPosition;
-  double WindowWidth{};
-  double WindowHeight{};
-  int CanvasRowsNumber{};
-  int CanvasColsNumber{};
-  std::vector<Object>* Objects{};
+  vec3 CameraPosition = vec3(0, 0, 0);
+  double WindowWidth = 80;
+  double WindowHeight = 45;
+  int CanvasRowsNumber = 450;
+  int CanvasColsNumber = 800;
+  vector<Object*> Objects;
  };
 
 
 class Scene {
 public:
-  explicit Scene(SceneParams sceneParams);
-  void Render(const std::function<void()>& renderFunction);
+  explicit Scene(const SceneParams& sceneParams);
+  void Render();
 private:
   vec3 cameraPosition;
   double windowWidth;
   double windowHeight;
   int canvasRowsNumber;
   int canvasColsNumber;
-  std::vector<Object>* objects;
+  vector<Object*> objects;
+
+  Object* GetClosestObject(VectorRay ray);
 };
 
 

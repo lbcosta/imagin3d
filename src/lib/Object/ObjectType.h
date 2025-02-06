@@ -12,6 +12,6 @@ enum ObjectType {
     PLANE,
     SPHERE,
     TRIANGLE,
-  };
+};
 
 #endif //OBJECTTYPE_H

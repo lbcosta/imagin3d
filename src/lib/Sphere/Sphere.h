@@ -7,12 +7,11 @@
 
 #include "../Object/Object.h"
 
-class Sphere final : virtual public Object {
+class Sphere final : public Object {
 public:
   Sphere(vec3 center, double radius, ObjectMaterial material);
 
   double RayIntersection(VectorRay ray) override;
-
   vec3 Normal(VectorRay ray) override;
 
 private:

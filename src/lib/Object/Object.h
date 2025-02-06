@@ -17,7 +17,7 @@ public:
   virtual ~Object() = default;
 
   int id;
-  ObjectType type;
+  ObjectType type{};
   ObjectMaterial material;
   virtual double RayIntersection(VectorRay ray) = 0;
   virtual vec3 Normal(VectorRay ray) = 0;
