@@ -68,14 +68,26 @@ Object* Scene::GetClosestObject(VectorRay ray) {
     return closestObject;
 }
 
-vec3 Scene::CalculateObjectLighting(Object *object, VectorRay ray) const {
+bool Scene::isLightObstructed(int closestObjectId, vec3 intersectionPoint) {
+    VectorRay lightRay(this->lightPosition, intersectionPoint);
+    Object* closestObjectToLightRay = this->GetClosestObject(lightRay);
+    double lightRayIntersectionMoment = closestObjectToLightRay->RayIntersection(lightRay);
+
+    bool isIntersectionMomentValid = lightRayIntersectionMoment > 0.0;
+    bool isClosestObjectToLightRayDifferent = closestObjectToLightRay->id != closestObjectId;
+    bool isLightRayTooLong = lightRayIntersectionMoment < (lightPosition - intersectionPoint).magnitude();
+
+    return isIntersectionMomentValid && isClosestObjectToLightRayDifferent && isLightRayTooLong;
+}
+
+vec3 Scene::CalculateObjectLighting(Object *object, VectorRay ray) {
     double rayIntersectionMoment = object->RayIntersection(ray);
     vec3 intersectionPoint = ray.Origin() + ray.Direction() * rayIntersectionMoment;
 
     vec3 ambient = object->material.AmbientReflection * this->ambientLight;
     vec3 diffuse, specular;
 
-    if (bool isLightObstructed = false; !isLightObstructed) {
+    if (!this->isLightObstructed(object->id, intersectionPoint)) {
         // light vectors
         vec3 v = vec3() - ray.Direction();
         vec3 n = object->Normal(ray);
@@ -83,8 +95,8 @@ vec3 Scene::CalculateObjectLighting(Object *object, VectorRay ray) const {
         vec3 r = (n - l) * (n.dot(l) * 2.0);
 
         // attenuation factors
-        float fd = max(n.dot(l), 0.0);
-        float fs = pow(max(v.dot(r), 0.0), object->material.Shininess);
+        double fd = max(n.dot(l), 0.0);
+        double fs = pow(max(v.dot(r), 0.0), object->material.Shininess);
 
         diffuse = object->material.DiffuseReflection * this->lightIntensity * fd;
         specular = object->material.SpecularReflection * this->lightIntensity * fs;

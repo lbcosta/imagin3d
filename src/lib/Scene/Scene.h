@@ -40,7 +40,8 @@ private:
   vector<Object*> objects;
 
   Object* GetClosestObject(VectorRay ray);
-  vec3 CalculateObjectLighting(Object* object, VectorRay ray) const;
+  vec3 CalculateObjectLighting(Object* object, VectorRay ray);
+  bool isLightObstructed(int closestObjectId, vec3 intersectionPoint);
 };
 
 
