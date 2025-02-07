@@ -21,6 +21,8 @@ public:
     vec3 operator*(double scalar) const;
     vec3 operator/(double scalar) const;
 
+    vec3 operator*(const vec3& other) const;
+
     double dot(const vec3& other) const;
 
     vec3 cross(const vec3& other) const;

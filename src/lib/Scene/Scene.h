@@ -13,6 +13,9 @@ using namespace std;
 
 struct SceneParams {
   vec3 CameraPosition = vec3(0, 0, 0);
+  vec3 LightPosition = vec3(0, 0, 0);
+  vec3 LightIntensity = vec3(0, 0, 0);
+  vec3 AmbientLight = vec3(0, 0, 0);
   double WindowWidth = 80;
   double WindowHeight = 45;
   int CanvasRowsNumber = 450;
@@ -27,6 +30,9 @@ public:
   void Render();
 private:
   vec3 cameraPosition;
+  vec3 lightPosition;
+  vec3 lightIntensity;
+  vec3 ambientLight;
   double windowWidth;
   double windowHeight;
   int canvasRowsNumber;
@@ -34,6 +40,7 @@ private:
   vector<Object*> objects;
 
   Object* GetClosestObject(VectorRay ray);
+  vec3 CalculateObjectLighting(Object* object, VectorRay ray) const;
 };
 
 

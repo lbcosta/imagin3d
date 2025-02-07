@@ -24,9 +24,14 @@ vec3 vec3::operator*(double scalar) const {
     return {x * scalar, y * scalar, z * scalar};
 }
 
+
 vec3 vec3::operator/(double scalar) const {
     if (scalar == 0) throw std::runtime_error("Divisão por zero!");
     return {x / scalar, y / scalar, z / scalar};
+}
+
+vec3 vec3::operator*(const vec3& other) const {
+    return {x * other.x, y * other.y, z * other.z};
 }
 
 double vec3::dot(const vec3& other) const {

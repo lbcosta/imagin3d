@@ -17,6 +17,8 @@ constexpr double WINDOW_HEIGHT = 45;
 constexpr int N_COL = 800;
 constexpr int N_ROW = 450;
 
+vec3 FIXED_ORIGIN = 0.0;
+
 using namespace std;
 
 int main() {
@@ -26,11 +28,23 @@ int main() {
     vector<Object*> objects;
 
     objects.push_back(
-        new Sphere({0.0, 0.0, -100.0}, 40.0, {vec3(), vec3(), vec3(), 0.0})
+        new Sphere(
+            {0.0, 0.0, -100.0},
+            40.0,
+            {
+                .AmbientReflection = vec3(0.7, 0.2, 0.2),
+                .DiffuseReflection = vec3(1.0, 0.0, 0.0),
+                .SpecularReflection = vec3(1.0, 1.0, 1.0),
+                .Shininess = 20.0
+            }
+        )
     );
 
     Scene scene(SceneParams{
-        .CameraPosition = 0.0,
+        .CameraPosition = FIXED_ORIGIN,
+        .LightPosition = {0, 50, 0},
+        .LightIntensity = {0.7, 0.7, 0.7},
+        .AmbientLight = {0.3, 0.3, 0.3},
         .WindowWidth = WINDOW_WIDTH,
         .WindowHeight = WINDOW_HEIGHT,
         .CanvasRowsNumber = N_ROW,
