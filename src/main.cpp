@@ -47,16 +47,16 @@ int main() {
                 .Shininess = 1.0
             }
             ),
-            new Plane( // Parede
-                {0.0, 0.0, -200.0},
-                {0.0, 0.0, 1.0},
-                {
-                    .AmbientReflection = vec3(0.3, 0.3, 0.7),
-                    .DiffuseReflection = vec3(0.3, 0.3, 0.7),
-                    .SpecularReflection = vec3(0.0),
-                    .Shininess = 1.0
-                }
-            )
+        new Plane( // Parede
+            {0.0, 0.0, -200.0},
+            {0.0, 0.0, 1.0},
+            {
+                .AmbientReflection = vec3(0.3, 0.3, 0.7),
+                .DiffuseReflection = vec3(0.3, 0.3, 0.7),
+                .SpecularReflection = vec3(0.0),
+                .Shininess = 1.0
+            }
+        )
     };
 
     Scene scene(SceneParams{
