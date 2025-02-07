@@ -1,8 +1,10 @@
 #include <memory>
+#include <valarray>
 
 #include "raylib.h"
 #include "lib/Math/vec3.h"
 #include "lib/Sphere/Sphere.h"
+#include "lib/Cylinder/Cylinder.h"
 #include "lib/Plane/Plane.h"
 #include "lib/Scene/Scene.h"
 
@@ -34,7 +36,7 @@ int main() {
                 .AmbientReflection = vec3(0.7, 0.2, 0.2),
                 .DiffuseReflection = vec3(0.7, 0.2, 0.2),
                 .SpecularReflection = vec3(0.7, 0.2, 0.2),
-                .Shininess = 10.0
+                .Shininess = 10
             }
         ),
         new Plane( // Piso
@@ -44,9 +46,9 @@ int main() {
                 .AmbientReflection = vec3(0.2, 0.7, 0.2),
                 .DiffuseReflection = vec3(0.2, 0.7, 0.2),
                 .SpecularReflection = vec3(0.0),
-                .Shininess = 1.0
+                .Shininess = 1
             }
-            ),
+        ),
         new Plane( // Parede
             {0.0, 0.0, -200.0},
             {0.0, 0.0, 1.0},
@@ -54,7 +56,19 @@ int main() {
                 .AmbientReflection = vec3(0.3, 0.3, 0.7),
                 .DiffuseReflection = vec3(0.3, 0.3, 0.7),
                 .SpecularReflection = vec3(0.0),
-                .Shininess = 1.0
+                .Shininess = 1
+            }
+        ),
+        new Cylinder(
+            {0, 0, -100},
+            40.0/3,
+            3*40.0,
+            {-1/sqrt(3), 1/sqrt(3), -1/sqrt(3)},
+            {
+                .AmbientReflection = vec3(0.2, 0.3, 0.8),
+                .DiffuseReflection = vec3(0.2, 0.3, 0.8),
+                .SpecularReflection = vec3(0.2, 0.3, 0.8),
+                .Shininess = 10
             }
         )
     };
