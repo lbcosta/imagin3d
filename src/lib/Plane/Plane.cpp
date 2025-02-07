@@ -13,8 +13,8 @@ Plane::Plane(vec3 point, vec3 normal, ObjectMaterial material) {
 
 double Plane::RayIntersection(VectorRay ray) {
     vec3 planeToOrigin = ray.Origin() - this->point;
-    float numerator = planeToOrigin.dot(this->normal);
-    float denominator = ray.Direction().dot(this->normal);
+    double numerator = planeToOrigin.dot(this->normal);
+    double denominator = ray.Direction().dot(this->normal);
 
     if (denominator == 0.0) {
         return -1.0;

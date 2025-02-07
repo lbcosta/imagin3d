@@ -30,16 +30,14 @@ void Scene::Render() {
 
     for (int row = 0; row <= this->canvasRowsNumber; row++) {
         for (int col = 0; col <= this->canvasColsNumber; col++) {
-            vec3 p = {
+            vec3 currentPosition = {
                 (-this->windowWidth/2) + (deltaX/2) + (col * deltaX),
                 (this->windowHeight/2) - (deltaY/2) - (row * deltaY),
                 FIXED_Z
             };
 
-            VectorRay ray(this->cameraPosition, p);
-            Object* closestObject = this->GetClosestObject(ray);
-
-            if (closestObject != nullptr) {
+            VectorRay ray(this->cameraPosition, currentPosition);
+            if (Object* closestObject = this->GetClosestObject(ray); closestObject != nullptr) {
                 vec3 color = this->CalculateObjectLighting(closestObject, ray);
                 pixel.r = static_cast<unsigned char>(color.r * 255);
                 pixel.g = static_cast<unsigned char>(color.g * 255);
@@ -58,8 +56,8 @@ Object* Scene::GetClosestObject(VectorRay ray) {
     Object* closestObject = nullptr;
     double closestIntersection = -1;
     for (Object* object : this->objects) {
-        double intersectionMoment = object->RayIntersection(ray);
-        if (intersectionMoment > 0.0 && (closestIntersection < 0 || intersectionMoment < closestIntersection)) {
+        if (double intersectionMoment = object->RayIntersection(ray);
+            intersectionMoment > 0.0 && (closestIntersection < 0 || intersectionMoment < closestIntersection)) {
             closestObject = object;
             closestIntersection = intersectionMoment;
         }

@@ -10,8 +10,8 @@
 class VectorRay {
   public:
     VectorRay(vec3 start, vec3 end);
-    vec3 Origin();
-    vec3 Direction();
+    vec3 Origin() const;
+    vec3 Direction() const;
   private:
     vec3 start;
     vec3 end;

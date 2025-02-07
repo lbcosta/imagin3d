@@ -9,12 +9,12 @@ VectorRay::VectorRay(vec3 start, vec3 end) {
   this->end = end;
 }
 
-vec3 VectorRay::Origin() {
+vec3 VectorRay::Origin() const {
   return this->start;
 }
 
 // Return normalized direction
-vec3 VectorRay::Direction() {
+vec3 VectorRay::Direction() const {
   vec3 d = this->end - this->start;
   return d.normalize();
 }
