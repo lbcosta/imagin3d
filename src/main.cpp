@@ -29,66 +29,58 @@ int main() {
     InitWindow(CANVAS_WIDTH, CANVAS_HEIGHT, "Imagin3D");
     SetTargetFPS(FPS);
 
+    vec3 woodTexture{0.54, 0.27, 0.07};
+
     vector<Object*> objects{
-        // new Sphere(
-        //     {0.0, 0.0, -100.0},
-        //     40.0,
-        //     {
-        //         .AmbientReflection = vec3(0.7, 0.2, 0.2),
-        //         .DiffuseReflection = vec3(0.7, 0.2, 0.2),
-        //         .SpecularReflection = vec3(0.7, 0.2, 0.2),
-        //         .Shininess = 10
-        //     }
-        // ),
-        // new Plane( // Piso
-        //     {0.0, -40.0, 0.0},
-        //     {0.0, 1.0, 0.0},
-        //     {
-        //         .AmbientReflection = vec3(0.2, 0.7, 0.2),
-        //         .DiffuseReflection = vec3(0.2, 0.7, 0.2),
-        //         .SpecularReflection = vec3(0.0),
-        //         .Shininess = 1
-        //     }
-        // ),
-        // new Plane( // Parede
-        //     {0.0, 0.0, -200.0},
-        //     {0.0, 0.0, 1.0},
-        //     {
-        //         .AmbientReflection = vec3(0.3, 0.3, 0.7),
-        //         .DiffuseReflection = vec3(0.3, 0.3, 0.7),
-        //         .SpecularReflection = vec3(0.0),
-        //         .Shininess = 1
-        //     }
-        // ),
-        // new Cylinder(
-        //     {0, 0, -100},
-        //     40.0/3,
-        //     3*40.0,
-        //     {-1/sqrt(3), 1/sqrt(3), -1/sqrt(3)},
-        //     {
-        //         .AmbientReflection = vec3(0.2, 0.3, 0.8),
-        //         .DiffuseReflection = vec3(0.2, 0.3, 0.8),
-        //         .SpecularReflection = vec3(0.2, 0.3, 0.8),
-        //         .Shininess = 10
-        //     }
-        //     ),
+        new Plane( // Piso
+            {0, -150, 0},
+            {0, 1, 0},
+            {woodTexture, woodTexture, woodTexture, 1}
+            ),
+        new Plane( // Parede Direita
+            {200, -150, 0},
+            {-1, 0, 0},
+            {{0.686, 0.933, 0.933}, {0.686, 0.933, 0.933}, {0.686, 0.933, 0.933}, 1}
+        ),
+        new Plane( // Parede de trás
+            {200, -150, -400},
+            {0, 0, 1},
+{{0.686, 0.933, 0.933}, {0.686, 0.933, 0.933}, {0.686, 0.933, 0.933}, 1}
+        ),
+        new Plane( // Parede Esquerda
+            {-200, -150, 0},
+            {1, 0, 0},
+        {{0.686, 0.933, 0.933}, {0.686, 0.933, 0.933}, {0.686, 0.933, 0.933}, 1}
+        ),
+        new Plane( // Telhado
+            {0, 150, 0},
+            {0, -1, 0},
+{{0.933, 0.933, 0.933}, {0.933, 0.933, 0.933}, {0.933, 0.933, 0.933}, 1}
+        ),
+        new Cylinder(
+            {0, -150, -200},
+            5,
+            90,
+            {0, 1, 0},
+{{0.824, 0.706, 0.549}, {0.824, 0.706, 0.549}, {0.824, 0.706, 0.549}, 10}
+        ),
         new Cone(
-            vec3{0, 0, -100} + vec3{-1/sqrt(3), 1/sqrt(3), -1/sqrt(3)} * (3*40.0) ,
-            40.0 * 1.5,
-            (40.0 * 1.5) / 3,
-            {-1/sqrt(3), 1/sqrt(3), -1/sqrt(3)},
-            {
-                .AmbientReflection = vec3(0.8, 0.3, 0.2),
-                .DiffuseReflection = vec3(0.8, 0.3, 0.2),
-                .SpecularReflection = vec3(0.8, 0.3, 0.2),
-                .Shininess = 10
-            }
+            {0, -60, -200},
+            90,
+            150,
+            {0, 1, 0},
+{{0, 1, 0.498}, {0, 1, 0.498}, {0, 1, 0.498}, 10}
+        ),
+        new Sphere(
+            {0, 95, -200},
+            5,
+{{0.854, 0.647, 0.125}, {0.854, 0.647, 0.125}, {0.854, 0.647, 0.125}, 10}
         )
     };
 
     Scene scene(SceneParams{
         .CameraPosition = FIXED_ORIGIN,
-        .LightPosition = {0, 60, -30},
+        .LightPosition = {-100, 140, -20},
         .LightIntensity = {0.7, 0.7, 0.7},
         .AmbientLight = {0.3, 0.3, 0.3},
         .WindowWidth = WINDOW_WIDTH,
