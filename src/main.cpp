@@ -30,48 +30,48 @@ int main() {
     SetTargetFPS(FPS);
 
     vector<Object*> objects{
-        new Sphere(
-            {0.0, 0.0, -100.0},
-            40.0,
-            {
-                .AmbientReflection = vec3(0.7, 0.2, 0.2),
-                .DiffuseReflection = vec3(0.7, 0.2, 0.2),
-                .SpecularReflection = vec3(0.7, 0.2, 0.2),
-                .Shininess = 10
-            }
-        ),
-        new Plane( // Piso
-            {0.0, -40.0, 0.0},
-            {0.0, 1.0, 0.0},
-            {
-                .AmbientReflection = vec3(0.2, 0.7, 0.2),
-                .DiffuseReflection = vec3(0.2, 0.7, 0.2),
-                .SpecularReflection = vec3(0.0),
-                .Shininess = 1
-            }
-        ),
-        new Plane( // Parede
-            {0.0, 0.0, -200.0},
-            {0.0, 0.0, 1.0},
-            {
-                .AmbientReflection = vec3(0.3, 0.3, 0.7),
-                .DiffuseReflection = vec3(0.3, 0.3, 0.7),
-                .SpecularReflection = vec3(0.0),
-                .Shininess = 1
-            }
-        ),
-        new Cylinder(
-            {0, 0, -100},
-            40.0/3,
-            3*40.0,
-            {-1/sqrt(3), 1/sqrt(3), -1/sqrt(3)},
-            {
-                .AmbientReflection = vec3(0.2, 0.3, 0.8),
-                .DiffuseReflection = vec3(0.2, 0.3, 0.8),
-                .SpecularReflection = vec3(0.2, 0.3, 0.8),
-                .Shininess = 10
-            }
-            ),
+        // new Sphere(
+        //     {0.0, 0.0, -100.0},
+        //     40.0,
+        //     {
+        //         .AmbientReflection = vec3(0.7, 0.2, 0.2),
+        //         .DiffuseReflection = vec3(0.7, 0.2, 0.2),
+        //         .SpecularReflection = vec3(0.7, 0.2, 0.2),
+        //         .Shininess = 10
+        //     }
+        // ),
+        // new Plane( // Piso
+        //     {0.0, -40.0, 0.0},
+        //     {0.0, 1.0, 0.0},
+        //     {
+        //         .AmbientReflection = vec3(0.2, 0.7, 0.2),
+        //         .DiffuseReflection = vec3(0.2, 0.7, 0.2),
+        //         .SpecularReflection = vec3(0.0),
+        //         .Shininess = 1
+        //     }
+        // ),
+        // new Plane( // Parede
+        //     {0.0, 0.0, -200.0},
+        //     {0.0, 0.0, 1.0},
+        //     {
+        //         .AmbientReflection = vec3(0.3, 0.3, 0.7),
+        //         .DiffuseReflection = vec3(0.3, 0.3, 0.7),
+        //         .SpecularReflection = vec3(0.0),
+        //         .Shininess = 1
+        //     }
+        // ),
+        // new Cylinder(
+        //     {0, 0, -100},
+        //     40.0/3,
+        //     3*40.0,
+        //     {-1/sqrt(3), 1/sqrt(3), -1/sqrt(3)},
+        //     {
+        //         .AmbientReflection = vec3(0.2, 0.3, 0.8),
+        //         .DiffuseReflection = vec3(0.2, 0.3, 0.8),
+        //         .SpecularReflection = vec3(0.2, 0.3, 0.8),
+        //         .Shininess = 10
+        //     }
+        //     ),
         new Cone(
             vec3{0, 0, -100} + vec3{-1/sqrt(3), 1/sqrt(3), -1/sqrt(3)} * (3*40.0) ,
             40.0 * 1.5,

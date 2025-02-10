@@ -21,20 +21,20 @@ double Cone::RayIntersection(VectorRay ray) {
     vec3 s = ray.Origin() - this->baseCenter;
 
     // a = (d.M.d.h^2) - (d.Q.d.r^2)
-    double a1 = (M * ray.Direction()).dot(ray.Direction() * pow(this->height, 2.0));
-    double a2 = (Q * ray.Direction()).dot(ray.Direction() * pow(this->baseRadius, 2.0));
+    double a1 = ray.Direction().dot(M * ray.Direction()) * pow(this->height, 2.0);
+    double a2 = ray.Direction().dot(Q * ray.Direction()) * pow(this->baseRadius, 2.0);
     double a = a1 - a2;
 
     // b = (2.d.M.s.h^2) + (2.d.Q.d.H.r^2) - (2.d.Q.s.r^2)
-    double b1 = 2.0 * (M * ray.Direction()).dot(s) * pow(this->height, 2.0);
-    double b2 = 2.0 * (Q * this->direction).dot(ray.Direction()) * this->height * pow(this->baseRadius, 2.0);
-    double b3 = 2.0 * (Q * ray.Direction()).dot(s) * pow(this->baseRadius, 2.0);
+    double b1 = 2.0 * s.dot(M * ray.Direction()) * pow(this->height, 2.0);
+    double b2 = 2.0 * ray.Direction().dot(Q * this->direction) * this->height * pow(this->baseRadius, 2.0);
+    double b3 = 2.0 * s.dot(Q * ray.Direction()) * pow(this->baseRadius, 2.0);
     double b = b1 + b2 - b3;
 
     // c = (s.M.s.h^2) + (2.d.Q.s.h.r^2) - (s.Q.s.r^2) - (h^2.r^2)
-    double c1 = (M * s).dot(s) * pow(this->height, 2.0);
-    double c2 = 2.0 * (Q * s).dot(this->direction) * this->height * pow(this->baseRadius, 2.0);
-    double c3 = (Q * s).dot(s) * pow(this->baseRadius, 2.0);
+    double c1 = s.dot(M * s) * pow(this->height, 2.0);
+    double c2 = 2.0 * s.dot(Q * this->direction) * this->height * pow(this->baseRadius, 2.0);
+    double c3 = s.dot(Q * s) * pow(this->baseRadius, 2.0);
     double c4 = pow(this->height, 2.0) * pow(this->baseRadius, 2.0);
     double c = c1 + c2 - c3 - c4;
 
