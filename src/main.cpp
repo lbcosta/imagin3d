@@ -5,6 +5,7 @@
 #include "lib/Math/vec3.h"
 #include "lib/Sphere/Sphere.h"
 #include "lib/Cylinder/Cylinder.h"
+#include "lib/Cone/Cone.h"
 #include "lib/Plane/Plane.h"
 #include "lib/Scene/Scene.h"
 
@@ -68,6 +69,18 @@ int main() {
                 .AmbientReflection = vec3(0.2, 0.3, 0.8),
                 .DiffuseReflection = vec3(0.2, 0.3, 0.8),
                 .SpecularReflection = vec3(0.2, 0.3, 0.8),
+                .Shininess = 10
+            }
+            ),
+        new Cone(
+            vec3{0, 0, -100} + vec3{-1/sqrt(3), 1/sqrt(3), -1/sqrt(3)} * (3*40.0) ,
+            40.0 * 1.5,
+            (40.0 * 1.5) / 3,
+            {-1/sqrt(3), 1/sqrt(3), -1/sqrt(3)},
+            {
+                .AmbientReflection = vec3(0.8, 0.3, 0.2),
+                .DiffuseReflection = vec3(0.8, 0.3, 0.2),
+                .SpecularReflection = vec3(0.8, 0.3, 0.2),
                 .Shininess = 10
             }
         )

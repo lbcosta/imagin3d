@@ -18,43 +18,41 @@ double Cylinder::RayIntersection(VectorRay ray) {
         mat3 M = this->GetProjectionMatrix();
         vec3 v = ray.Origin() - this->baseCenter;
 
-        float a = (M * ray.Direction()).dot(ray.Direction());
-        float b = 2.0 * (M * ray.Direction()).dot(v);
-        float c = (M * v).dot(v) - pow(this->baseRadius, 2.0);
+        double a = (M * ray.Direction()).dot(ray.Direction());
+        double b = 2.0 * (M * ray.Direction()).dot(v);
+        double c = (M * v).dot(v) - pow(this->baseRadius, 2.0);
 
         if (a == 0.0) {
-            float t = -c / b;
+            double t = -c / b;
             vec3 intersectionPoint = ray.Origin() + ray.Direction() * t;
-            bool isValidIntersectionPoint = this->ValidateIntersectionPoint(intersectionPoint);
 
-            if (isValidIntersectionPoint) {
+            if (this->ValidateIntersectionPoint(intersectionPoint)) {
                 return t;
-            } else {
-                return -1.0;
             }
+
+            return -1.0;
         }
 
-        float discriminant = b * b - 4.0 * a * c;
+        double discriminant = b * b - 4.0 * a * c;
 
         if (discriminant < 0.0) {
             return -1.0;
         }
 
         if (discriminant == 0.0) {
-            float t = -b / (2.0 * a);
+            double t = -b / (2.0 * a);
             vec3 intersectionPoint = ray.Origin() + ray.Direction() * t;
-            bool isValidIntersectionPoint = this->ValidateIntersectionPoint(intersectionPoint);
 
-            if (isValidIntersectionPoint) {
+            if (this->ValidateIntersectionPoint(intersectionPoint)) {
                 return t;
-            } else {
-                return -1.0;
             }
+
+            return -1.0;
         }
 
         // calculate t values
-        float t1 = (-b - sqrt(discriminant)) / (2.0 * a);
-        float t2 = (-b + sqrt(discriminant)) / (2.0 * a);
+        double t1 = (-b - sqrt(discriminant)) / (2.0 * a);
+        double t2 = (-b + sqrt(discriminant)) / (2.0 * a);
 
         // calculate intersection points
         vec3 intersectionPoint1 = ray.Origin() + ray.Direction() * t1;
@@ -66,17 +64,21 @@ double Cylinder::RayIntersection(VectorRay ray) {
 
         if (isValidIntersectionPoint1 && isValidIntersectionPoint2) {
             return t1 < t2 ? t1 : t2;
-        } else if (isValidIntersectionPoint1) {
-            return t1;
-        } else if (isValidIntersectionPoint2) {
-            return t2;
-        } else {
-            return -1.0;
         }
+
+        if (isValidIntersectionPoint1) {
+            return t1;
+        }
+
+        if (isValidIntersectionPoint2) {
+            return t2;
+        }
+
+        return -1.0;
 }
 
 vec3 Cylinder::Normal(VectorRay ray) {
-    float t = this->RayIntersection(ray);
+    double t = this->RayIntersection(ray);
     vec3 intersectionPoint = ray.Origin() + ray.Direction() * t;
     vec3 baseToIntersection = intersectionPoint - this->baseCenter;
     vec3 projection = this->direction * this->direction.dot(baseToIntersection);
@@ -85,8 +87,8 @@ vec3 Cylinder::Normal(VectorRay ray) {
     return normal;
 }
 
-mat3 Cylinder::GetProjectionMatrix() {
-    mat3 identityMatrix = mat3(1.0);
+mat3 Cylinder::GetProjectionMatrix() const {
+    mat3 identityMatrix(1.0);
 
     vec3 cylinderAxis = this->direction.normalize();
     mat3 cylinderAxisMatrix = mat3::OuterProduct(cylinderAxis, cylinderAxis);
@@ -95,8 +97,8 @@ mat3 Cylinder::GetProjectionMatrix() {
     return projectionMatrix;
 }
 
-bool Cylinder::ValidateIntersectionPoint(vec3 intersectionPoint) {
+bool Cylinder::ValidateIntersectionPoint(vec3 intersectionPoint) const {
     vec3 baseToIntersection = intersectionPoint - this->baseCenter;
-    float projection = baseToIntersection.dot(this->direction);
+    double projection = baseToIntersection.dot(this->direction);
     return projection >= 0.0 && projection <= this->height;
 }
