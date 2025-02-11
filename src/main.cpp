@@ -7,6 +7,7 @@
 #include "lib/Cylinder/Cylinder.h"
 #include "lib/Cone/Cone.h"
 #include "lib/Plane/Plane.h"
+#include "lib/PolygonMesh/PolygonMesh.h"
 #include "lib/Scene/Scene.h"
 
 // Canvas
@@ -75,7 +76,7 @@ int main() {
             {0, 95, -200},
             5,
 {{0.854, 0.647, 0.125}, {0.854, 0.647, 0.125}, {0.854, 0.647, 0.125}, 10}
-        )
+        ),
     };
 
     Scene scene(SceneParams{

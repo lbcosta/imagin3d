@@ -15,7 +15,8 @@ public:
     double RayIntersection(VectorRay ray) override;
     vec3 Normal(VectorRay ray) override;
 private:
-  vec3 vertices[3];
+    vec3 vertices[3];
+    vec3 N;
 };
 
 
