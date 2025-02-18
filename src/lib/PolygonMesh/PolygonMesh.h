@@ -11,13 +11,15 @@
 
 using namespace std;
 
-class PolygonMesh final: public Object {
+class PolygonMesh: public Object {
 public:
     PolygonMesh(vector<vec3> vertices, ObjectMaterial material);
 
+
     double RayIntersection(VectorRay ray) override;
     vec3 Normal(VectorRay ray) override;
-private:
+protected:
+    PolygonMesh() = default;
     vector<Triangle> triangles;
 };
 

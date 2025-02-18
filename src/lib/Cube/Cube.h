@@ -5,18 +5,15 @@
 #ifndef CUBE_H
 #define CUBE_H
 
+#include <vector>
+#include "../PolygonMesh/PolygonMesh.h"
+#include "../Triangle/Triangle.h"
 
-#include "../Object/Object.h"
+using namespace std;
 
-class Cube final: public Object {
+class Cube final: public PolygonMesh {
 public:
     Cube(vec3 center, double size, ObjectMaterial material);
-
-    double RayIntersection(VectorRay ray) override;
-    vec3 Normal(VectorRay ray) override;
-private:
-  vec3 center;
-  double size;
 };
 
 

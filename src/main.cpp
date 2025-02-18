@@ -7,7 +7,7 @@
 #include "lib/Cylinder/Cylinder.h"
 #include "lib/Cone/Cone.h"
 #include "lib/Plane/Plane.h"
-#include "lib/PolygonMesh/PolygonMesh.h"
+#include "lib/Cube/Cube.h"
 #include "lib/Scene/Scene.h"
 
 // Canvas
@@ -76,6 +76,11 @@ int main() {
             {0, 95, -200},
             5,
 {{0.854, 0.647, 0.125}, {0.854, 0.647, 0.125}, {0.854, 0.647, 0.125}, 10}
+        ),
+        new Cube(
+            {0, -150, -165},
+            40,
+{{1, 0.078, 0.576}, {1, 0.078, 0.576}, {1, 0.078, 0.576}, 10}
         ),
     };
 
