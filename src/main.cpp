@@ -12,15 +12,15 @@
 
 // Canvas
 // 800x450 = 16:9
-constexpr int CANVAS_WIDTH = 800; // pixels
-constexpr int CANVAS_HEIGHT = 450; // pixels
-constexpr int FPS = 15;
+constexpr int CANVAS_WIDTH = 600; // pixels
+constexpr int CANVAS_HEIGHT = 600; // pixels
+constexpr int FPS = 1;
 
 // Window/Frame
-constexpr double WINDOW_WIDTH = 80;
-constexpr double WINDOW_HEIGHT = 45;
-constexpr int N_COL = 800;
-constexpr int N_ROW = 450;
+constexpr double WINDOW_WIDTH = 60;
+constexpr double WINDOW_HEIGHT = 60;
+constexpr int N_COL = 600;
+constexpr int N_ROW = 600;
 
 vec3 FIXED_ORIGIN = 0.0;
 
