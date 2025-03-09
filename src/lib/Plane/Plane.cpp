@@ -26,3 +26,5 @@ double Plane::RayIntersection(VectorRay ray) {
 vec3 Plane::Normal(VectorRay ray) {
     return this->normal;
 };
+
+void Plane::Transform() {}

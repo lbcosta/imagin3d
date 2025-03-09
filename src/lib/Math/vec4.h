@@ -30,7 +30,7 @@ public:
     double magnitude() const;
     vec4 normalize() const;
 
-    vec4 xyz() const;
+    vec3 xyz() const;
     vec4 xyzw() const;
 
     vec4 rgba() const;

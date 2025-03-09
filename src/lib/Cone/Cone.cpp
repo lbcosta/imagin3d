@@ -104,3 +104,5 @@ vec3 Cone::Normal(VectorRay ray) {
 
     return normal;
 }
+
+void Cone::Transform() {}

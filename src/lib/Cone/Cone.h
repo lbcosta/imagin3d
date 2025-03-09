@@ -15,6 +15,7 @@ public:
 
     double RayIntersection(VectorRay ray) override;
     vec3 Normal(VectorRay ray) override;
+    void Transform() override;
 private:
     vec3 baseCenter;
     double baseRadius;

@@ -8,13 +8,16 @@
 #include "./ObjectType.h"
 #include "./ObjectMaterial.h"
 #include "../VectorRay/VectorRay.h"
+#include "../Transformable/Transformable.h"
 
-class Object {
+class mat3;
+
+class Object : public Transformable {
 protected:
   inline static int cursor = 0;
 public:
   Object() : id(cursor++) {}
-  virtual ~Object() = default;
+  ~Object() = default;
 
   int id;
   ObjectType type{};

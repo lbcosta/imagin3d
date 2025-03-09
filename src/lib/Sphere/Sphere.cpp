@@ -40,8 +40,9 @@ vec3 Sphere::Normal(VectorRay ray) {
     return n;
 };
 
-
-
+void Sphere::Transform() {
+    this->center = this->TransformPoint(this->center);
+}
 
 
 

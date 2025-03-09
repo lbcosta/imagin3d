@@ -102,3 +102,5 @@ bool Cylinder::ValidateIntersectionPoint(vec3 intersectionPoint) const {
     double projection = baseToIntersection.dot(this->direction);
     return projection >= 0.0 && projection <= this->height;
 }
+
+void Cylinder::Transform() {}

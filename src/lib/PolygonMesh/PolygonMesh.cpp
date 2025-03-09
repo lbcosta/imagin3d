@@ -44,3 +44,5 @@ vec3 PolygonMesh::Normal(VectorRay ray) {
     return closestTriangle->Normal(ray);
 }
 
+void PolygonMesh::Transform() {}
+

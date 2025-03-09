@@ -48,7 +48,7 @@ vec4 vec4::normalize() const {
     return *this / mag;
 }
 
-vec4 vec4::xyz() const { return {x, y, z, 0}; }
+vec3 vec4::xyz() const { return {x, y, z}; }
 vec4 vec4::xyzw() const { return {x, y, z, w}; }
 
 vec4 vec4::rgba() const { return {r, g, b, a}; }

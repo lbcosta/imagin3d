@@ -49,3 +49,5 @@ double Triangle::RayIntersection(VectorRay ray) {
 vec3 Triangle::Normal(VectorRay ray) {
     return this->N.normalize();
 }
+
+void Triangle::Transform() {}
