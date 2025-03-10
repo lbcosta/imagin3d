@@ -12,6 +12,8 @@ class Transformable {
 public:
   virtual ~Transformable() = default;
 
+  mat4 GetTransformationMatrix() const;
+  void SetTransformationMatrix(mat4 matrix);
   Transformable *Translate(vec3 t);
   Transformable *Scale(vec3 s, vec3 reference);
 

@@ -11,6 +11,7 @@ class Transformer {
 public:
   void Append(mat4 m);
   mat4 GetMatrix() const;
+  void SetMatrix(mat4 m);
 private:
   mat4 transformationMatrix = mat4(1);
 };

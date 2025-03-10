@@ -15,7 +15,6 @@ class PolygonMesh: public Object {
 public:
     PolygonMesh(vector<vec3> vertices, ObjectMaterial material);
 
-
     double RayIntersection(VectorRay ray) override;
     vec3 Normal(VectorRay ray) override;
     void Transform() override;

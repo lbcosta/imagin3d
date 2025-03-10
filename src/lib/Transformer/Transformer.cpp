@@ -11,3 +11,7 @@ void Transformer::Append(mat4 m) {
 mat4 Transformer::GetMatrix() const {
   return this->transformationMatrix;
 }
+
+void Transformer::SetMatrix(mat4 m) {
+  this->transformationMatrix = m;
+}

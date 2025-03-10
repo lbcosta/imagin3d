@@ -44,5 +44,10 @@ vec3 PolygonMesh::Normal(VectorRay ray) {
     return closestTriangle->Normal(ray);
 }
 
-void PolygonMesh::Transform() {}
+void PolygonMesh::Transform() {
+    for (Triangle& triangle : this->triangles) {
+        triangle.SetTransformationMatrix(this->GetTransformationMatrix());
+        triangle.Transform();
+    }
+}
 

@@ -50,4 +50,12 @@ vec3 Triangle::Normal(VectorRay ray) {
     return this->N.normalize();
 }
 
-void Triangle::Transform() {}
+void Triangle::Transform() {
+    this->vertices[0] = this->TransformPoint(this->vertices[0]);
+    this->vertices[1] = this->TransformPoint(this->vertices[1]);
+    this->vertices[2] = this->TransformPoint(this->vertices[2]);
+
+    vec3 v1 = this->vertices[1] - this->vertices[0];
+    vec3 v2 = this->vertices[2] - this->vertices[0];
+    this->N = v1.cross(v2);
+}

@@ -4,7 +4,15 @@
 
 #include "Transformable.h"
 
-Transformable *Transformable::Translate(vec3 t) {
+mat4 Transformable::GetTransformationMatrix() const {
+    return this->transformer.GetMatrix();
+}
+
+void Transformable::SetTransformationMatrix(mat4 matrix) {
+    this->transformer.SetMatrix(matrix);
+}
+
+Transformable* Transformable::Translate(vec3 t) {
     this->transformer.Append({
         {1, 0, 0, t.x},
         {0, 1, 0, t.y},
@@ -15,7 +23,7 @@ Transformable *Transformable::Translate(vec3 t) {
     return this;
 }
 
-Transformable *Transformable::Scale(vec3 s, vec3 reference) {
+Transformable* Transformable::Scale(vec3 s, vec3 reference) {
     this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
     this->transformer.Append({
         {s.x, 0, 0, 0},

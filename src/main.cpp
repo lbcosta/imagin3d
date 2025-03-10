@@ -66,18 +66,13 @@ int main() {
 //             {0, 1, 0},
 // {{0.824, 0.706, 0.549}, {0.824, 0.706, 0.549}, {0.824, 0.706, 0.549}, 10}
 //         ),
-        new Cone(
-            {0, -60, -200},
-            90,
-            150,
-            {0, 1, 0},
-{{0, 1, 0.498}, {0, 1, 0.498}, {0, 1, 0.498}, 10}
-         ),
-//         new Cube(
-//             {0, -150, -165},
-//             40,
-// {{1, 0.078, 0.576}, {1, 0.078, 0.576}, {1, 0.078, 0.576}, 10}
-//         ),
+//         new Cone(
+//             {0, -60, -200},
+//             90,
+//             150,
+//             {0, 1, 0},
+// {{0, 1, 0.498}, {0, 1, 0.498}, {0, 1, 0.498}, 10}
+//          ),
     };
 
     vec3 sphereCenter = {0, 95, -200};
@@ -93,6 +88,20 @@ int main() {
         ->Transform();
 
     objects.push_back(sphere);
+
+    vec3 cubeCenter = {0, -150, -165};
+    double cubeSize = 40;
+    auto *cube = new Cube(
+            cubeCenter,
+            cubeSize,
+{{1, 0.078, 0.576}, {1, 0.078, 0.576}, {1, 0.078, 0.576}, 10}
+    );
+
+    cube
+        ->Translate({0, 100, 0})
+        ->Transform();
+
+    objects.push_back(cube);
 
     Scene scene(SceneParams{
         .CameraPosition = FIXED_ORIGIN,
