@@ -87,7 +87,10 @@ int main() {
         {{0.854, 0.647, 0.125}, {0.854, 0.647, 0.125}, {0.854, 0.647, 0.125}, 10}
     );
 
-    sphere->Translate({50, -50, 100})->Transform();
+    sphere
+        ->Translate({50, -50, 100})
+        ->Scale({5, 5, 5}, sphereCenter)
+        ->Transform();
 
     objects.push_back(sphere);
 

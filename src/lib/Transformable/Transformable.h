@@ -13,6 +13,8 @@ public:
   virtual ~Transformable() = default;
 
   Transformable *Translate(vec3 t);
+  Transformable *Scale(vec3 s, vec3 reference);
+
   vec3 TransformPoint(vec3 p) const;
   virtual void Transform() = 0;
 

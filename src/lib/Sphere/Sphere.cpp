@@ -41,7 +41,9 @@ vec3 Sphere::Normal(VectorRay ray) {
 };
 
 void Sphere::Transform() {
+    vec3 p = this->center + vec3(radius, 0, 0);
     this->center = this->TransformPoint(this->center);
+    this->radius = (this->TransformPoint(p) - this->center).magnitude();
 }
 
 

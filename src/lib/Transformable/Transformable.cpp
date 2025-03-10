@@ -5,14 +5,26 @@
 #include "Transformable.h"
 
 Transformable *Transformable::Translate(vec3 t) {
-    mat4 m(
+    this->transformer.Append({
         {1, 0, 0, t.x},
         {0, 1, 0, t.y},
         {0, 0, 1, t.z},
         {0, 0, 0, 1}
-    );
+    });
 
-    this->transformer.Append(m);
+    return this;
+}
+
+Transformable *Transformable::Scale(vec3 s, vec3 reference) {
+    this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
+    this->transformer.Append({
+        {s.x, 0, 0, 0},
+        {0, s.y, 0, 0},
+        {0, 0, s.z, 0},
+        {0, 0, 0, 1}
+    });
+    this->Translate({0 - reference.x, 0 - reference.y, 0 - reference.z});
+
     return this;
 }
 
