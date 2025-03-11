@@ -5,21 +5,21 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <memory>
 #include <vector>
 #include "../Object/Object.h"
+#include "Parameters.h"
 
 using namespace std;
 
 struct SceneParams {
-  vec3 CameraPosition = vec3(0, 0, 0);
+  vec3 CameraPosition = FIXED_ORIGIN;
   vec3 LightPosition = vec3(0, 0, 0);
   vec3 LightIntensity = vec3(0, 0, 0);
   vec3 AmbientLight = vec3(0, 0, 0);
-  double WindowWidth = 80;
-  double WindowHeight = 45;
-  int CanvasRowsNumber = 450;
-  int CanvasColsNumber = 800;
+  double WindowWidth = WINDOW_WIDTH;
+  double WindowHeight = WINDOW_HEIGHT;
+  int CanvasRowsNumber = N_ROW;
+  int CanvasColsNumber = N_COL;
   vector<Object*> Objects;
  };
 
