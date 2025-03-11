@@ -20,7 +20,7 @@
             - [x] Em torno de um eixo arbitrário
                 - [x] Quatérnios
         - [x] **1.4.3. Escala (Obrigatório)**
-        - [ ] **1.4.4. Cisalhamento (+0.5)**
+        - [x] **1.4.4. Cisalhamento (+0.5)**
         - [ ] **1.4.5. Espelho em relação a um plano arbitrário (+0.5)**
     - [ ] **1.5. Fontes luminosas**
         - [x] **1.5.1. Pontual (Obrigatório)**
