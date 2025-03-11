@@ -99,8 +99,7 @@ int main() {
     );
 
     cube
-        ->RotateZ(30, cubeCenter)
-    ->Translate({0, 50, 0})
+        ->Rotate(30, cubeCenter, cubeCenter + vec3{2, 0, 1})
         ->Transform();
 
     objects.push_back(cube);

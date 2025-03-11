@@ -19,6 +19,7 @@ public:
   Transformable *RotateX(double angle, vec3 reference);
   Transformable *RotateY(double angle, vec3 reference);
   Transformable *RotateZ(double angle, vec3 reference);
+  Transformable *Rotate(double angle, vec3 p1, vec3 p2);
 
   vec3 TransformPoint(vec3 p) const;
   virtual void Transform() = 0;

@@ -41,14 +41,14 @@ Transformable* Transformable::Scale(vec3 s, vec3 reference) {
 }
 
 Transformable* Transformable::RotateX(double angle, vec3 reference) {
-    double s = sin(angle*PI/180.0);
-    double c = cos(angle*PI/180.0);
+    double sen = sin(angle*PI/180.0);
+    double coss = cos(angle*PI/180.0);
 
     this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
     this->transformer.Append({
         {1, 0, 0, 0},
-        {0, c, -s, 0},
-        {0, s, c, 0},
+        {0, coss, -sen, 0},
+        {0, sen, coss, 0},
         {0, 0, 0, 1},
     });
     this->Translate({0 - reference.x, 0 - reference.y, 0 - reference.z});
@@ -57,14 +57,14 @@ Transformable* Transformable::RotateX(double angle, vec3 reference) {
 }
 
 Transformable* Transformable::RotateY(double angle, vec3 reference) {
-    double s = sin(angle*PI/180.0);
-    double c = cos(angle*PI/180.0);
+    double sen = sin(angle*PI/180.0);
+    double coss = cos(angle*PI/180.0);
 
     this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
     this->transformer.Append({
-        {c, 0, s, 0},
+        {coss, 0, sen, 0},
         {0, 1, 0, 0},
-        {-s, 0, c, 0},
+        {-sen, 0, coss, 0},
         {0, 0, 0, 1},
     });
     this->Translate({0 - reference.x, 0 - reference.y, 0 - reference.z});
@@ -73,17 +73,40 @@ Transformable* Transformable::RotateY(double angle, vec3 reference) {
 }
 
 Transformable* Transformable::RotateZ(double angle, vec3 reference) {
-    double s = sin(angle*PI/180.0);
-    double c = cos(angle*PI/180.0);
+    double sen = sin(angle*PI/180.0);
+    double coss = cos(angle*PI/180.0);
 
     this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
     this->transformer.Append({
-        {c, -s, 0, 0},
-        {s, c, 0, 0},
+        {coss, -sen, 0, 0},
+        {sen, coss, 0, 0},
         {0, 0, 1, 0},
         {0, 0, 0, 1},
     });
     this->Translate({0 - reference.x, 0 - reference.y, 0 - reference.z});
+
+    return this;
+}
+
+
+Transformable* Transformable::Rotate(double angle, vec3 p1, vec3 p2) {
+    vec3 u = (p2 - p1).normalize();
+    double sen = sin(angle*PI/180.0);
+    double coss = cos(angle*PI/180.0);
+
+    double x = sen * u.x;
+    double y = sen * u.y;
+    double z = sen * u.z;
+    double w = coss;
+
+    this->Translate({p1.x - 0, p1.y - 0, p1.z - 0});
+    this->transformer.Append({
+        {(w*w + x*x - y*y - z*z), 2 * (x*y - w*z), 2 * (x*z + w*y), 0},
+        {2 * (x*y + w*z), (w*w - x*x + y*y - z*z), 2 * (y*z - w*x), 0},
+        {2 * (x*z - w*y), 2 * (y*z + w*x), (w*w - x*x - y*y + z*z), 0},
+        {0, 0, 0, 1},
+    });
+    this->Translate({0 - p1.x, 0 - p1.y, 0 - p1.z});
 
     return this;
 }
