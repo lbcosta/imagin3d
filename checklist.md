@@ -13,7 +13,7 @@
             - [x] Malha
         - [ ] **1.3.2. Materiais (pelo menos quatro materiais distintos) (Obrigatório)**
         - [ ] **1.3.3. Textura (pelo menos uma textura aplicada) (Obrigatório)**
-    - [ ] **1.4. Transformações**
+    - [x] **1.4. Transformações**
         - [x] **1.4.1. Translação (Obrigatório)**
         - [x] **1.4.2. Rotação**
             - [x] Em torno de um dos eixos x, y ou z (Obrigatório)
@@ -21,7 +21,7 @@
                 - [x] Quatérnios
         - [x] **1.4.3. Escala (Obrigatório)**
         - [x] **1.4.4. Cisalhamento (+0.5)**
-        - [ ] **1.4.5. Espelho em relação a um plano arbitrário (+0.5)**
+        - [x] **1.4.5. Espelho em relação a um plano arbitrário (+0.5)**
     - [ ] **1.5. Fontes luminosas**
         - [x] **1.5.1. Pontual (Obrigatório)**
         - [ ] **1.5.2. Spot (+1.0)**

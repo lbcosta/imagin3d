@@ -99,9 +99,7 @@ int main() {
     );
 
     cube
-        ->Scale({2, 0, 0}, cubeCenter)
-        ->RotateY(90, cubeCenter)
-        ->Shear(30, YZ, Z, cubeCenter)
+        ->Reflect({0,0,0}, {1,0,0}, {0,0,1})
         ->Transform();
 
     objects.push_back(cube);

@@ -157,6 +157,22 @@ Transformable* Transformable::Shear(double angle, ShearPlane plane, ShearDirecti
     return this;
 }
 
+Transformable* Transformable::Reflect(vec3 p1, vec3 p2, vec3 p3) {
+    vec3 v1 = p2 - p1;
+    vec3 v2 = p3 - p1;
+    vec3 n = v1.cross(v2).normalize();
+
+    this->Translate({p1.x - 0, p1.y - 0, p1.z - 0});
+    this->transformer.Append({
+        {1 - 2 * (n.x * n.x), -2 * (n.x * n.y), -2 * (n.x * n.z), 0},
+        {-2 * (n.y * n.x), 1 - 2 * (n.y * n.y), -2 * (n.y * n.z), 0},
+        {-2 * (n.z * n.x), -2 * (n.z * n.y), 1 - 2 * (n.z * n.z), 0},
+        {0, 0, 0, 1}
+    });
+    this->Translate({0 - p1.x, 0 - p1.y, 0 - p1.z});
+    return this;
+}
+
 vec3 Transformable::TransformPoint(vec3 p) const {
     vec4 p_4d(p.x, p.y, p.z, 1);
     vec4 new_p_4d = this->transformer.GetMatrix() * p_4d;

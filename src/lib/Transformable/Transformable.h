@@ -22,6 +22,7 @@ public:
   Transformable *RotateZ(double angle, vec3 reference);
   Transformable *Rotate(double angle, vec3 p1, vec3 p2);
   Transformable *Shear(double angle, ShearPlane plane, ShearDirection direction, vec3 reference);
+  Transformable *Reflect(vec3 p1, vec3 p2, vec3 p3);
 
   vec3 TransformPoint(vec3 p) const;
   virtual void Transform() = 0;
