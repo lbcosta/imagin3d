@@ -15,15 +15,16 @@ class mat3;
 class Object : public Transformable {
 protected:
   inline static int cursor = 0;
+  ObjectMaterial material;
 public:
   Object() : id(cursor++) {}
   ~Object() = default;
 
   int id;
   ObjectType type{};
-  ObjectMaterial material;
   virtual double RayIntersection(VectorRay ray) = 0;
   virtual vec3 Normal(VectorRay ray) = 0;
+  virtual ObjectMaterial GetMaterialAt(vec3 p) { return this->material; }
 };
 
 

@@ -98,10 +98,6 @@ int main() {
 {{1, 0.078, 0.576}, {1, 0.078, 0.576}, {1, 0.078, 0.576}, 10}
     );
 
-    cube
-        ->Reflect({0,0,0}, {1,0,0}, {0,0,1})
-        ->Transform();
-
     objects.push_back(cube);
 
     Scene scene(SceneParams{

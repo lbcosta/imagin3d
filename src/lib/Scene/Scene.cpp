@@ -82,7 +82,14 @@ vec3 Scene::CalculateObjectLighting(Object *object, VectorRay ray) {
     double rayIntersectionMoment = object->RayIntersection(ray);
     vec3 intersectionPoint = ray.Origin() + ray.Direction() * rayIntersectionMoment;
 
-    vec3 ambient = object->material.AmbientReflection * this->ambientLight;
+    auto [
+        ambientReflection,
+        diffuseReflection,
+        specularReflection,
+        shininess
+    ] = object->GetMaterialAt(intersectionPoint);
+
+    vec3 ambient = ambientReflection * this->ambientLight;
     vec3 diffuse, specular;
 
     if (!this->isLightObstructed(object->id, intersectionPoint)) {
@@ -94,10 +101,10 @@ vec3 Scene::CalculateObjectLighting(Object *object, VectorRay ray) {
 
         // attenuation factors
         double fd = max(n.dot(l), 0.0);
-        double fs = pow(max(v.dot(r), 0.0), object->material.Shininess);
+        double fs = pow(max(v.dot(r), 0.0), shininess);
 
-        diffuse = object->material.DiffuseReflection * this->lightIntensity * fd;
-        specular = object->material.SpecularReflection * this->lightIntensity * fs;
+        diffuse = diffuseReflection * this->lightIntensity * fd;
+        specular = specularReflection * this->lightIntensity * fs;
     }
 
 
