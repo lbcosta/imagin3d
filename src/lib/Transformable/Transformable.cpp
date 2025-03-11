@@ -28,6 +28,10 @@ Transformable* Transformable::Translate(vec3 t) {
 }
 
 Transformable* Transformable::Scale(vec3 s, vec3 reference) {
+    if (s.x == 0) s.x = 1;
+    if (s.y == 0) s.y = 1;
+    if (s.z == 0) s.z = 1;
+
     this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
     this->transformer.Append({
         {s.x, 0, 0, 0},
