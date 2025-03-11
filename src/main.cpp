@@ -99,7 +99,9 @@ int main() {
     );
 
     cube
-        ->Rotate(30, cubeCenter, cubeCenter + vec3{2, 0, 1})
+        ->Scale({2, 0, 0}, cubeCenter)
+        ->RotateY(90, cubeCenter)
+        ->Shear(30, YZ, Z, cubeCenter)
         ->Transform();
 
     objects.push_back(cube);

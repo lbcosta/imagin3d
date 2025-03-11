@@ -5,6 +5,7 @@
 #include "Transformable.h"
 
 #include <cmath>
+#include <stdexcept>
 
 #include "raylib.h"
 
@@ -111,6 +112,47 @@ Transformable* Transformable::Rotate(double angle, vec3 p1, vec3 p2) {
         {0, 0, 0, 1},
     });
     this->Translate({0 - p1.x, 0 - p1.y, 0 - p1.z});
+
+    return this;
+}
+
+Transformable* Transformable::Shear(double angle, ShearPlane plane, ShearDirection direction, vec3 reference) {
+    double tg = tan(angle*PI/180.0);
+
+    mat4 M = {
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1},
+    };
+
+    if (plane == XY) {
+        switch (direction) {
+            case X: M[0].y = tg;break;
+            case Y: M[1].x = tg;break;
+            default: throw std::runtime_error("Cisalhamento em XY precisa ser nas direcoes X ou Y!");
+        }
+    }
+
+    if (plane == XZ) {
+        switch (direction) {
+            case X: M[0].z = tg;break;
+            case Z: M[2].x = tg;break;
+            default: throw std::runtime_error("Cisalhamento em XZ precisa ser nas direcoes X ou Z!");
+        }
+    }
+
+    if (plane == YZ) {
+        switch (direction) {
+            case Y: M[1].z = tg;break;
+            case Z: M[2].y = tg;break;
+            default: throw std::runtime_error("Cisalhamento em YZ precisa ser nas direcoes Y ou Z!");
+        }
+    }
+
+    this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
+    this->transformer.Append(M);
+    this->Translate({0 - reference.x, 0 - reference.y, 0 - reference.z});
 
     return this;
 }
