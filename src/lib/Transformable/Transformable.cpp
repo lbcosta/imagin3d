@@ -4,6 +4,10 @@
 
 #include "Transformable.h"
 
+#include <cmath>
+
+#include "raylib.h"
+
 mat4 Transformable::GetTransformationMatrix() const {
     return this->transformer.GetMatrix();
 }
@@ -30,6 +34,54 @@ Transformable* Transformable::Scale(vec3 s, vec3 reference) {
         {0, s.y, 0, 0},
         {0, 0, s.z, 0},
         {0, 0, 0, 1}
+    });
+    this->Translate({0 - reference.x, 0 - reference.y, 0 - reference.z});
+
+    return this;
+}
+
+Transformable* Transformable::RotateX(double angle, vec3 reference) {
+    double s = sin(angle*PI/180.0);
+    double c = cos(angle*PI/180.0);
+
+    this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
+    this->transformer.Append({
+        {1, 0, 0, 0},
+        {0, c, -s, 0},
+        {0, s, c, 0},
+        {0, 0, 0, 1},
+    });
+    this->Translate({0 - reference.x, 0 - reference.y, 0 - reference.z});
+
+    return this;
+}
+
+Transformable* Transformable::RotateY(double angle, vec3 reference) {
+    double s = sin(angle*PI/180.0);
+    double c = cos(angle*PI/180.0);
+
+    this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
+    this->transformer.Append({
+        {c, 0, s, 0},
+        {0, 1, 0, 0},
+        {-s, 0, c, 0},
+        {0, 0, 0, 1},
+    });
+    this->Translate({0 - reference.x, 0 - reference.y, 0 - reference.z});
+
+    return this;
+}
+
+Transformable* Transformable::RotateZ(double angle, vec3 reference) {
+    double s = sin(angle*PI/180.0);
+    double c = cos(angle*PI/180.0);
+
+    this->Translate({reference.x - 0, reference.y - 0, reference.z - 0});
+    this->transformer.Append({
+        {c, -s, 0, 0},
+        {s, c, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1},
     });
     this->Translate({0 - reference.x, 0 - reference.y, 0 - reference.z});
 

@@ -89,7 +89,8 @@ int main() {
 
     objects.push_back(sphere);
 
-    vec3 cubeCenter = {0, -150, -165};
+    // vec3 cubeCenter = {0, -150, -165};
+    vec3 cubeCenter = {0, -50, -165};
     double cubeSize = 40;
     auto *cube = new Cube(
             cubeCenter,
@@ -98,7 +99,8 @@ int main() {
     );
 
     cube
-        ->Translate({0, 100, 0})
+        ->RotateZ(30, cubeCenter)
+    ->Translate({0, 50, 0})
         ->Transform();
 
     objects.push_back(cube);
