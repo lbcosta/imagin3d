@@ -14,6 +14,18 @@ PlaneTexture::PlaneTexture(TextureName type, double shininess) {
     case WOOD:
       fileName = "../assets/wood.png";
       break;
+    case WATER:
+      fileName = "../assets/water.png";
+      break;
+    case SKY:
+      fileName = "../assets/sky.png";
+      break;
+    case BRICK:
+      fileName = "../assets/brick.png";
+      break;
+    case WHITE_BRICK:
+      fileName = "../assets/white_brick.png";
+      break;
   }
 
   Image img = LoadImage(fileName);

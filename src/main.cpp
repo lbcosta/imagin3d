@@ -16,16 +16,59 @@ int main() {
     SetTargetFPS(FPS);
 
     vector<Object*> objects{
-        new Plane({0, -150, 0},{0, 1, 0}, WOOD_TEXTURE), // Piso
-        new Plane( {200, -150, 0},{-1, 0, 0}, POWDER_BLUE), // Parede Direita
-        new Plane({200, -150, -400},{0, 0, 1}, POWDER_BLUE), // Parede de trás
-        new Plane( {-200, -150, 0},{1, 0, 0}, POWDER_BLUE), // Parede Esquerda
-        new Plane({0, 150, 0},{0, -1, 0}, POWDER_BLUE), // Telhado
-        new Cylinder({0, -150, -200},5,90,{0, 1, 0}, DUSTY_BROWN), // Base da árvore
-        new Cone({0, -60, -200},90,150,{0, 1, 0},TROPICAL_GREEN), // Árvore
-        new Sphere({0, 95, -200},5,ANTIQUE_GOLD), // Globo de Natal
-        new Cube({0, -150, -165},40,VIBRANT_PINK) // Presente de Natal
+        // Fundo
+            new Plane({0, -150, 0},{0, 1, 0}, WATER_TEXTURE), // Oceano
+            new Plane({200, -150, -2000},{0, 0, 1}, SKY_TEXTURE), // Horizonte
+        // Ilha
+            new Cylinder({0, -150, -500},200,30,{0, 1, 0}, GROUND_BROWN),
+            new Sphere({0, -150, -500},200,GRASS_GREEN),
+        // Farol
+            new Cylinder({0, 10, -500},50,50,{0, 1, 0}, WALL_GRAY),
+            new Cylinder({0, 60, -500},50,50,{0, 1, 0}, BRICK_ORANGE),
+            new Cylinder({0, 110, -500},50,50,{0, 1, 0}, WALL_GRAY),
+            new Cylinder({0, 160, -500},50,50,{0, 1, 0}, BRICK_ORANGE),
+            new Cylinder({0, 210, -500},50,50,{0, 1, 0}, WALL_GRAY),
+            new Cylinder({0, 260, -500},50,50,{0, 1, 0}, BRICK_ORANGE),
+            new Cylinder({0, 310, -500},50,20,{0, 1, 0}, POWDER_BLUE),
+            new Cone({0, 330, -500},50,100,{0, 1, 0},DUSTY_BROWN),
     };
+
+    vec3 houseBaseCenter = {45, 45, -430};
+    auto houseBase = new Cube(houseBaseCenter,45,WALL_GRAY);
+    houseBase->Scale({2, 0, 0}, houseBaseCenter)->Transform();
+
+    vec3 houseRoof1Center = {45, 90, -430};
+    auto houseRoof1 = new Cube(houseRoof1Center,45,BRICK_ORANGE);
+    houseRoof1
+        ->Translate({-15, -15, 0})
+        ->Scale({2, 0, 0}, houseRoof1Center)
+        ->Shear(45, XY, X, houseRoof1Center)
+        ->Scale({0.25, 0.4, 0}, houseRoof1Center)
+    ->Transform();
+
+    vec3 houseRoof2Center = {45, 90, -430};
+    auto houseRoof2 = new Cube(houseRoof2Center,45,BRICK_ORANGE);
+    houseRoof2
+        ->Translate({5, 0, 0})
+        ->Reflect({45, 90, -430}, {45, 60, -460}, {45, 120, -490})
+        ->Translate({-15, -15, 0})
+        ->Scale({2, 0, 0}, houseRoof2Center)
+        ->Shear(45, XY, X, houseRoof2Center)
+        ->Scale({0.25, 0.4, 0}, houseRoof2Center)
+        ->Transform();
+
+
+    vec3 doorCenter = {45, 45, -415};
+    auto door = new Cube(doorCenter,45,GROUND_BROWN);
+    door
+        ->Translate({0, -5, 0})
+        ->Scale({0.5, 0.75, 0.5}, doorCenter)
+        ->Transform();
+
+    objects.push_back(houseBase);
+    objects.push_back(houseRoof1);;
+    objects.push_back(houseRoof2);
+    objects.push_back(door);
 
     Scene scene(SceneParams{
         .LightPosition = {-100, 140, -20},

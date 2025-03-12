@@ -10,6 +10,10 @@
 
 enum TextureName {
   WOOD,
+  WATER,
+  SKY,
+  BRICK,
+  WHITE_BRICK,
 };
 
 class PlaneTexture {
