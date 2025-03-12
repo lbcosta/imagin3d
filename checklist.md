@@ -1,7 +1,7 @@
 # Checklist dos Requisitos da Apresentação Final
 
-- [ ] **1. Definição do cenário**
-    - [ ] **1.1. Coerência temática (Obrigatório)**
+- [x] **1. Definição do cenário**
+    - [x] **1.1. Coerência temática (Obrigatório)**
         - O cenário deve ter coerência temática (não pode ser um amontoado de objetos aleatórios).
     - [ ] **1.2. Coordenadas do mundo (Obrigatório)**
         - Todos os objetos devem estar no primeiro octante (x, y e z positivos).
@@ -11,8 +11,8 @@
             - [x] Cilindro
             - [x] Cone
             - [x] Malha
-        - [ ] **1.3.2. Materiais (pelo menos quatro materiais distintos) (Obrigatório)**
-        - [ ] **1.3.3. Textura (pelo menos uma textura aplicada) (Obrigatório)**
+        - [x] **1.3.2. Materiais (pelo menos quatro materiais distintos) (Obrigatório)**
+        - [x] **1.3.3. Textura (pelo menos uma textura aplicada) (Obrigatório)**
     - [x] **1.4. Transformações**
         - [x] **1.4.1. Translação (Obrigatório)**
         - [x] **1.4.2. Rotação**
